@@ -1,0 +1,9 @@
+.docker/
+postgres-data/
+*/vendor/
+*/node_modules/*
+*/dist
+respaldo/
+maketas-ui/*/
+node_modules/*
+./node_modules/*

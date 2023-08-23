@@ -1,0 +1,20 @@
+{
+  "name": "ecommerce",
+  "version": "1.0.0",
+  "description": "Ecommerce de la compañia G&G Bodyshop ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docker:init": "docker-compose up -d"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ciclo-special/ecommerce.git"
+  },
+  "author": "Roso Peñaranda",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ciclo-special/ecommerce/issues"
+  },
+  "homepage": "https://github.com/ciclo-special/ecommerce#readme"
+}
