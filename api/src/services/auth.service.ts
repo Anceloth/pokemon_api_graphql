@@ -23,18 +23,18 @@ export class AuthService {
   ) {}
 
   async signin(signinDto: SigninDto): Promise<LoggedInDto> {
-    const { user_name, password } = signinDto;
+    const { userName, password } = signinDto;
     const user: User | undefined = await this._userRepository.findOne({
-      where: { user_name, status: StatusEntity.ACTIVE },
+      where: { user_name: userName, status: StatusEntity.ACTIVE },
     });
 
     if (!user) {
-      throw new NotFoundException(`user ${user_name} does not exist`);
+      throw new NotFoundException(`user ${userName} does not exist`);
     }
 
-    if (!user.is_active) {
+    if (!user.isActive) {
       throw new PreconditionFailedException(
-        `user ${user_name} need validate his emails`,
+        `user ${userName} need validate his emails`,
       );
     }
 
@@ -48,7 +48,7 @@ export class AuthService {
 
     const payload: IJwtPayload = {
       id: user.id,
-      user_name: user.user_name,
+      userName: user.userName,
     };
 
     const token = this._jwtService.sign(payload);

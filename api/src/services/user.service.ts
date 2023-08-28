@@ -8,15 +8,19 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { plainToClass } from 'class-transformer';
 import { StatusEntity } from 'src/database/enums.num';
 import { InputUserType, User } from 'src/database/models/user.entity';
+import { User as UserMongo } from 'src/database/models/user.schema';
 import { Repository } from 'typeorm';
 import { genSalt, hash } from 'bcryptjs';
 import { validateOrReject } from 'class-validator';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User)
     private readonly _userRepository: Repository<User>,
+    @InjectModel('User') private readonly _userModel: Model<UserMongo>,
   ) {}
 
   async get(userName: string): Promise<User> {
@@ -54,6 +58,20 @@ export class UserService {
     }
   }
 
+  async getFromMongo(userName: string): Promise<UserMongo> {
+    const user = await this._userModel.findOne({ userName });
+    console.log(user);
+    return user;
+  }
+
+  async updateUserMongo(userMongo: UserMongo): Promise<UserMongo> {
+    return await this._userModel.findOneAndUpdate(
+      { id: userMongo.id },
+      { $set: { pokemons: userMongo.pokemons } },
+      { new: true },
+    );
+  }
+
   async create(user: InputUserType): Promise<User> {
     let newUser = plainToClass(User, user);
     const salt = await genSalt(10);
@@ -75,6 +93,4 @@ export class UserService {
       throw new InternalServerErrorException({ message });
     }
   }
-
-  
 }

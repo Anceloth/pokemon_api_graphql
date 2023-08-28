@@ -2,6 +2,12 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input AddPokemonToUser {
+  pokemonName: String!
+  urlPokemon: String!
+  userName: String!
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
@@ -10,7 +16,7 @@ scalar DateTime
 input InputUserType {
   name: String!
   password: String!
-  user_name: String!
+  userName: String!
 }
 
 """
@@ -24,6 +30,7 @@ type LoggedInDto {
 }
 
 type Mutation {
+  addPokemonToUser(pokemonDTO: AddPokemonToUser!): User!
   createUser(newUser: InputUserType!): User!
   updateUser(updates: UpdateUser!, userName: String!): User!
 }
@@ -58,7 +65,7 @@ type Query {
 
 input SigninDto {
   password: String!
-  user_name: String!
+  userName: String!
 }
 
 """Posibles estados de las entidades"""
@@ -68,17 +75,17 @@ enum StatusEntity {
 }
 
 input UpdateUser {
-  is_active: Boolean!
+  isActive: Boolean!
   password: String!
 }
 
 type User {
   createAt: DateTime!
   id: Int!
-  is_active: Boolean!
+  isActive: Boolean!
   name: String!
   pokemons: [Pokemon!]!
   status: StatusEntity!
   updateAt: DateTime!
-  user_name: String!
+  userName: String
 }

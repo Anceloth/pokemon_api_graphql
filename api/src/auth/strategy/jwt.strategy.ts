@@ -13,18 +13,18 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
     @InjectRepository(User)
     private readonly _userRepository: Repository<User>,
-    private config: EasyconfigService
+    private config: EasyconfigService,
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey:config.get('JWT_SECRET'),
+      secretOrKey: config.get('JWT_SECRET'),
     });
   }
 
   async validate(payload: IJwtPayload): Promise<IJwtPayload> {
-    const { user_name } = payload;
+    const { userName } = payload;
     const user = await this._userRepository.findOne({
-      where: { user_name, status: StatusEntity.ACTIVE },
+      where: { user_name: userName, status: StatusEntity.ACTIVE },
     });
     if (!user) {
       throw new UnauthorizedException();

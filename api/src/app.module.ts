@@ -13,6 +13,7 @@ import * as winston from 'winston';
 import GraphQLJSON from 'graphql-type-json';
 import { AuthModule } from './modules/auth.module';
 import { PokemonModule } from './modules/pokemon.module';
+import { MongoDBModule } from './modules/mongoose.module';
 
 @Module({
   imports: [
@@ -44,6 +45,7 @@ import { PokemonModule } from './modules/pokemon.module';
       //resolvers: { JSON: GraphQLJSON },
       context: ({ req }) => ({ req }),
     }),
+    MongoDBModule,
     DatabaseModule,
     UserModule,
     AuthModule,

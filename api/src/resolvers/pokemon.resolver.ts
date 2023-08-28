@@ -1,10 +1,14 @@
 import { Inject, UseGuards } from '@nestjs/common';
-import { Args, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { GetUser } from 'src/auth/decorators/user.decorator';
 import { GQLAuthGuard } from 'src/auth/guards/GQLAuth.guard';
 import { IJwtPayloadDTO } from 'src/database/models/auth.entity';
-import { PokemonJSON, PokemonType } from 'src/database/models/pokemon.entity';
+import {
+  AddPokemonToUser,
+  PokemonJSON,
+  PokemonType,
+} from 'src/database/models/pokemon.entity';
 import { PokemonUseCase } from 'src/useCases/pokemon.usecases';
 import { Logger } from 'winston';
 

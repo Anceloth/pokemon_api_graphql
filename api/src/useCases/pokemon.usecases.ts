@@ -1,10 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import {
+  AddPokemonToUser,
   Pokemon,
   PokemonJSON,
   PokemonType,
 } from 'src/database/models/pokemon.entity';
 import { PokemonService } from 'src/services/pokemon.service';
+import { UserService } from 'src/services/user.service';
 
 @Injectable()
 export class PokemonUseCase {

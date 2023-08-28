@@ -12,11 +12,16 @@ import { Content } from './content.entity';
 
 @Entity('users')
 @ObjectType()
-@Unique(['user_name'])
 export class User extends Content {
-  @Field(() => String)
-  @Column({ type: 'varchar', length: 50 })
-  user_name!: string;
+  @Field(() => String, { nullable: true })
+  @Column({
+    type: 'varchar',
+    length: 50,
+    name: 'user_name',
+    unique: true,
+    nullable: true,
+  })
+  userName?: string;
 
   @Field(() => String)
   @Column({ type: 'varchar', length: 50 })
@@ -26,8 +31,8 @@ export class User extends Content {
   password!: string;
 
   @Field(() => Boolean)
-  @Column({ type: 'boolean', default: false })
-  is_active!: boolean;
+  @Column({ type: 'boolean', default: false, name: 'is_active' })
+  isActive!: boolean;
 
   @Field(() => [Pokemon])
   @ManyToMany(
@@ -40,8 +45,8 @@ export class User extends Content {
 }
 @InputType()
 export class InputUserType {
-  @Field()
-  user_name!: string;
+  @Field(() => String)
+  userName!: string;
 
   @Field(() => String)
   @Column({ type: 'varchar', length: 50 })
@@ -54,7 +59,7 @@ export class InputUserType {
 @InputType()
 export class UpdateUser {
   @Field(() => Boolean)
-  is_active?: boolean;
+  isActive?: boolean;
 
   @Field()
   password!: string;

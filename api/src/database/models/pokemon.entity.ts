@@ -40,12 +40,15 @@ export class PokemonJSON {
 }
 
 @InputType()
-export class InputPokemon {
+export class AddPokemonToUser {
   @Field(() => String)
-  data?: string;
+  pokemonName?: string;
 
   @Field(() => String)
-  state?: string;
+  urlPokemon?: string;
+
+  @Field(() => String)
+  userName?: string;
 }
 
 @Exclude()
