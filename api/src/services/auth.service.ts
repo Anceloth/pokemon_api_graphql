@@ -24,8 +24,9 @@ export class AuthService {
 
   async signin(signinDto: SigninDto): Promise<LoggedInDto> {
     const { userName, password } = signinDto;
+
     const user: User | undefined = await this._userRepository.findOne({
-      where: { user_name: userName, status: StatusEntity.ACTIVE },
+      where: { userName, status: StatusEntity.ACTIVE },
     });
 
     if (!user) {

@@ -44,7 +44,9 @@ export class UserResolver {
 
   //@UseGuards(GQLAuthGuard)
   @Query(() => [UserType])
-  async getAllUser(@GetUser() user: IJwtPayloadDTO): Promise<UserType[]> {
+  async getAllUser(
+    @GetUser() user: IJwtPayloadDTO,
+  ): Promise<UserType[] | UserMongoose[]> {
     try {
       return await this._userCase.getAll();
     } catch (error) {

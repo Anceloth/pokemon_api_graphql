@@ -64,6 +64,12 @@ export class UserService {
     return user;
   }
 
+  async getAllFromMongo(): Promise<UserMongo[]> {
+    const user = await this._userModel.find();
+    console.log(user);
+    return user;
+  }
+
   async updateUserMongo(userMongo: UserMongo): Promise<UserMongo> {
     return await this._userModel.findOneAndUpdate(
       { id: userMongo.id },

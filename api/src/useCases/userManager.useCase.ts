@@ -20,8 +20,10 @@ export class UserManagerUseCase {
     return userMongoose;
   }
 
-  async getAll(): Promise<User[]> {
-    return await this._userService.getAll();
+  async getAll(): Promise<User[] | UserMongoose[]> {
+    // const user = await this._userService.getAll();
+    const user = await this._userService.getAllFromMongo();
+    return await user;
   }
 
   async addPokemonToUser(
